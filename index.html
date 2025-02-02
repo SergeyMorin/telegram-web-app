@@ -97,7 +97,7 @@
             const form = document.getElementById("consultation-form");
 
             form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Остановка стандартной отправки формы
+                event.preventDefault(); // Отмена стандартной отправки формы
 
                 const formData = new FormData(form);
 
@@ -105,11 +105,11 @@
                     method: "POST",
                     body: formData,
                 })
-                .then(response => response.json())
+                .then(response => response.json()) // Теперь ожидаем JSON
                 .then(data => {
                     if (data.success) {
-                        form.style.display = "none";  // Скрываем форму
-                        document.getElementById("success-message").style.display = "block"; // Показываем сообщение
+                        document.getElementById("consultation-form").style.display = "none";
+                        document.getElementById("success-message").style.display = "block";
                     } else {
                         alert(data.message);
                     }
