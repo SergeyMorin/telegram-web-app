@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import telebot
 from telebot import types
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import threading
 
 
@@ -43,15 +43,15 @@ def submit_form():
     phone = request.form.get('phone')
 
     if not name or not phone:
-        return "Ошибка: Пожалуйста, заполните все поля.", 400
+        return jsonify({"success": False, "message": "Ошибка: Пожалуйста, заполните все поля."}), 400
 
     message = f"Новая заявка на консультацию:\n\nИмя: {name}\nТелефон: {phone}"
 
     try:
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
-        return "Заявка успешно отправлена!", 200
+        return jsonify({"success": True, "message": "Заявка успешно отправлена!"}), 200
     except Exception as e:
-        return f"Ошибка при отправке сообщения: {str(e)}", 500
+        return jsonify({"success": False, "message": f"Ошибка при отправке сообщения: {str(e)}"}), 500
 
 
 def run_bot():
