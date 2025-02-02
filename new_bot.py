@@ -16,7 +16,9 @@ if not TELEGRAM_CHAT_ID:
 bot = telebot.TeleBot(api_token)
 app = Flask(__name__)
 
-WEBHOOK_URL = "https://66.151.40.169/webhook"
+WEBHOOK_URL = "https://66.151.40.169/webhook" # server https://66.151.40.169 # lan https://127.0.0.1:5000/webhoo
+bot.remove_webhook()
+bot.set_webhook(url=WEBHOOK_URL)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
