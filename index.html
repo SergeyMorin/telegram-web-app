@@ -93,11 +93,9 @@
     <script src="https://web.telegram.org/js/telegram-web-app.js"></script>
     <script>
         function handleSubmit() {
-            // Получаем данные из формы
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
 
-            // Отправляем данные на сервер
             fetch('http://66.151.40.169:5000/submit-form', {
                 method: 'POST',
                 body: new URLSearchParams({
@@ -107,9 +105,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Скрываем форму
                     document.getElementById('consultation-form').style.display = 'none';
-                    // Показываем сообщение об успехе
                     document.getElementById('success-message').style.display = 'block';
                 } else {
                     alert('Произошла ошибка при отправке данных. Попробуйте снова.');
