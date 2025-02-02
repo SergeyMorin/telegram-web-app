@@ -1,22 +1,93 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Web App</title>
+    <title>ИТ-РЕГИОН</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>Добро пожаловать в Telegram Web App!</h1>
-    <p>Здесь будет ваш контент.</p>
 
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="/assets/images/itr.svg" alt="Логотип компании" class="logo">
+        </div>
+    </header>
+
+    <div class="slider-container">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Слайды с преимуществами -->
+                <div class="swiper-slide">
+                    <img src="assets/images/bg1.jpg" alt="Видеонаблюдение">
+                    <div class="slide-content">
+                        <h2>Видеонаблюдение</h2>
+                        <p>Контроль и безопасность вашего бизнеса</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/bg2.jpg" alt="Интернет">
+                    <div class="slide-content">
+                        <h2>Интернет</h2>
+                        <p>Подключить интернет для бизнеса в Гатчине</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/bg3.jpg" alt="Каналы связи">
+                    <div class="slide-content">
+                        <h2>Каналы связи</h2>
+                        <p>Описание преимущества третьей услуги компании</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/bg3.jpg" alt="Локальная сеть">
+                    <div class="slide-content">
+                        <h2>Локальная сеть</h2>
+                        <p>Объедините компьютеры в единую сеть</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/bg5.jpg" alt="Система оповещения">
+                    <div class="slide-content">
+                        <h2>Система оповещения</h2>
+                        <p>Важная информация должна быть услышана</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/bg6.jpg" alt="Обслуживание компьютеров">
+                    <div class="slide-content">
+                        <h2>Обслуживание компьютеров</h2>
+                        <p>Исправная техника не подводит</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="consultation-form">
+            <h3>Оставьте заявку на консультацию</h3>
+            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+            <input type="tel" id="phone" name="phone" placeholder="Ваш телефон" required>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Контактная информация</h3>
+            <p><strong>Тел:</strong> 8 (812) 457-13-30</p>
+            <p><strong>Адрес:</strong> 188300, Гатчина, проспект 25 Октября, 35</p>
+            <p><strong>Email:</strong> <a href="mailto:L2@itreg.ru">L2@itreg.ru</a></p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
     <script src="https://web.telegram.org/js/telegram-web-app.js"></script>
     <script>
         Telegram.WebApp.init();
-
-        Telegram.WebApp.onEvent('themeChanged', function() {
-            console.log('Тема изменена');
-        });
-
         Telegram.WebApp.MainButton.setText("Нажми меня");
         Telegram.WebApp.MainButton.onClick(function() {
             Telegram.WebApp.close();
