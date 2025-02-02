@@ -16,16 +16,16 @@ if not TELEGRAM_CHAT_ID:
 bot = telebot.TeleBot(api_token)
 app = Flask(__name__)
 
-WEBHOOK_URL = "https://66.151.40.169/webhook" # server https://66.151.40.169 # lan https://127.0.0.1:5000/webhoo
-bot.remove_webhook()
-bot.set_webhook(url=WEBHOOK_URL)
+# WEBHOOK_URL = "https://66.151.40.169/webhook" # server https://66.151.40.169 # lan https://127.0.0.1:5000/webhoo
+# bot.remove_webhook()
+# bot.set_webhook(url=WEBHOOK_URL)
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    json_str = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_str)
-    bot.process_new_updates([update])
-    return "OK", 200
+# @app.route('/webhook', methods=['POST'])
+# def webhook():
+#     json_str = request.get_data().decode('utf-8')
+#     update = telebot.types.Update.de_json(json_str)
+#     bot.process_new_updates([update])
+#     return "OK", 200
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -52,6 +52,6 @@ def submit_form():
         return f"Ошибка при отправке сообщения: {str(e)}", 500
 
 if __name__ == '__main__':
-    bot.remove_webhook()
-    bot.set_webhook(url=WEBHOOK_URL)
+    # bot.remove_webhook()
+    # bot.set_webhook(url=WEBHOOK_URL)
     app.run(host="0.0.0.0", port=5000, debug=True)
