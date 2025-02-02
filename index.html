@@ -72,6 +72,11 @@
             <input type="tel" id="phone" name="phone" placeholder="Ваш телефон" required>
             <button type="submit">Отправить</button>
         </form>
+
+        <div id="success-message" style="display: none;">
+            <h3>Спасибо за заявку!</h3>
+            <p>Можете закрыть окно.</p>
+        </div>
     </div>
 
     <footer class="footer">
@@ -86,11 +91,13 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
     <script src="https://web.telegram.org/js/telegram-web-app.js"></script>
-        <script>
-        function sendToTelegram() {
+    <script>
+        function handleSubmit() {
+            // Получаем данные из формы
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
 
+            // Отправляем данные на сервер
             fetch('http://66.151.40.169:5000/submit-form', {
                 method: 'POST',
                 body: new URLSearchParams({
@@ -98,13 +105,19 @@
                     'phone': phone
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                Telegram.WebApp.close();
-                Telegram.WebApp.openTelegram();
+            .then(response => {
+                if (response.ok) {
+                    // Скрываем форму
+                    document.getElementById('consultation-form').style.display = 'none';
+                    // Показываем сообщение об успехе
+                    document.getElementById('success-message').style.display = 'block';
+                } else {
+                    alert('Произошла ошибка при отправке данных. Попробуйте снова.');
+                }
             })
             .catch(error => {
                 console.error('Ошибка при отправке формы:', error);
+                alert('Произошла ошибка. Попробуйте снова.');
             });
         }
     </script>
