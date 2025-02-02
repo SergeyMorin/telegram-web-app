@@ -86,12 +86,28 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
     <script src="https://web.telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        Telegram.WebApp.init();
-        Telegram.WebApp.MainButton.setText("Нажми меня");
-        Telegram.WebApp.MainButton.onClick(function() {
-            Telegram.WebApp.close();
-        });
+        <script>
+        function sendToTelegram() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+
+            fetch('http://66.151.40.169:5000/submit-form', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'name': name,
+                    'phone': phone
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                Telegram.WebApp.close();
+                Telegram.WebApp.openTelegram();
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке формы:', error);
+            });
+        }
     </script>
+
 </body>
 </html>
