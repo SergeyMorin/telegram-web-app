@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import telebot
 from telebot import types
 from flask import Flask, request
+import threading
+
 
 load_dotenv()
 api_token = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -51,7 +53,16 @@ def submit_form():
     except Exception as e:
         return f"Ошибка при отправке сообщения: {str(e)}", 500
 
+
+def run_bot():
+    bot.polling(non_stop=True)
+
+
 if __name__ == '__main__':
     # bot.remove_webhook()
     # bot.set_webhook(url=WEBHOOK_URL)
+
+    bot_thread = threading.Thread(target=run_bot)
+    bot_thread.daemon = True
+    bot_thread.start()
     app.run(host="0.0.0.0", port=5000, debug=True)
